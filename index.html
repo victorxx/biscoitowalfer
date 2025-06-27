@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notícias Walfer - O mundo do biscoito wafer</title>
+  <!-- Meta tags para SEO e acessibilidade -->
+  <meta name="description" content="Fique por dentro das novidades, lançamentos e vídeos incríveis sobre os biscoitos Walfer." />
+  <meta name="keywords" content="walfer, biscoito, wafer, doce, sobremesa, vídeo, notícia, lançamento" />
+  <meta name="author" content="Walfer News Team" />
+
+  <style>
+    /* Reset básico para remover margens e paddings e ajustar box-sizing */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Estilo base do corpo da página */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8f0; /* cor de fundo suave */
+      color: #4a2c18; /* cor do texto */
+      line-height: 1.6;
+      padding-bottom: 80px; /* espaço inferior para o footer fixo */
+    }
+
+    /* Estilo do cabeçalho */
+    header {
+      background-color: #f2c185; /* cor de fundo do header */
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* sombra leve */
+    }
+
+    /* Título principal do header */
+    header h1 {
+      font-size: 2.5rem;
+      color: #6b3e26;
+    }
+
+    /* Estilo da navegação */
+    nav {
+      margin-top: 10px;
+    }
+
+    /* Links do menu */
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: #fff;
+      font-weight: bold;
+      background-color: #6b3e26;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    /* Efeito hover nos links */
+    nav a:hover {
+      background-color: #8d5030;
+    }
+
+    /* Container principal do conteúdo */
+    main {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Estilo dos artigos de notícias */
+    article {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      overflow: hidden;
+      padding-bottom: 20px;
+    }
+
+    /* Imagens dentro dos artigos */
+    article img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Título dos artigos */
+    article h2 {
+      padding: 20px 20px 0;
+      color: #6b3e26;
+      font-size: 1.8rem;
+    }
+
+    /* Parágrafos dos artigos */
+    article p {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+
+    /* Data da publicação das notícias */
+    .pub-date {
+      padding: 0 20px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    /* Container responsivo para vídeos - mantém proporção 16:9 */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      padding-top: 25px;
+      height: 0;
+      overflow: hidden;
+      margin: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    }
+
+    /* Estilo do iframe de vídeo para preencher o container */
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+
+    /* Estilo do rodapé fixo */
+    footer {
+      background-color: #6b3e26;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    
+    /* Container fixo do iframe para anúncio (posição fixa no canto inferior direito) */
+    #iframe-wrapper {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      max-width: 400px;
+      height: 50vh; /* altura relativa no desktop */
+      max-height: 400px;
+      z-index: 9999;
+      border-radius: 10px 0 0 0;
+      box-shadow: -2px -2px 12px rgba(0,0,0,0.3);
+      background-color: #fff;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Estilo do iframe dentro do wrapper */
+    #iframe-fixo {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px 0 0 0;
+      display: block;
+    }
+
+    /* Botão para fechar o anúncio */
+    #close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      line-height: 32px;
+      text-align: center;
+      z-index: 10000;
+      display: none; /* inicialmente escondido */
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover do botão fechar */
+    #close-btn:hover {
+      background: rgba(255, 0, 0, 0.8);
+    }
+
+    /* Ajustes para dispositivos móveis */
+    @media (max-width: 600px) {
+      #iframe-wrapper {
+        max-width: 100%;
+        height: 400px; /* altura fixa menor no mobile */
+        border-radius: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      #iframe-fixo {
+        border-radius: 0;
+      }
+
+      #close-btn {
+        top: 6px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+        line-height: 28px;
+      }
+    }
+    footer a{
+        color:white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho da página com título e navegação -->
+  <header>
+    <h1>Notícias Walfer</h1>
+    <nav>
+      <a href="#noticias">Notícias</a>
+      <a href="#videos">Vídeos</a>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <!-- Primeira notícia -->
+    <article id="noticias">
+      <h2>Nova linha de sabores chega ao mercado!</h2>
+      <p class="pub-date">Publicado em 27 de junho de 2025</p>
+      <p>A Walfer lançou uma nova linha de biscoitos com recheios inspirados em sobremesas brasileiras. Entre os destaques estão os sabores de brigadeiro, churros e maracujá com leite condensado.</p>
+    </article>
+
+    <!-- Outras notícias -->
+    <article>
+      <h2>Walfer anuncia embalagem sustentável</h2>
+      <p class="pub-date">Publicado em 20 de junho de 2025</p>
+      <p>A empresa investe em embalagens recicláveis e biodegradáveis para reduzir o impacto ambiental e contribuir para um planeta mais saudável.</p>
+    </article>
+
+    <article>
+      <h2>Parceria com chefs renomados para novos sabores</h2>
+      <p class="pub-date">Publicado em 15 de junho de 2025</p>
+      <p>Walfer fechou uma parceria com chefs famosos para criar sabores exclusivos e sofisticados que serão lançados ainda este ano.</p>
+    </article>
+
+    <article>
+      <h2>Walfer ganha prêmio de inovação no setor alimentício</h2>
+      <p class="pub-date">Publicado em 10 de junho de 2025</p>
+      <p>A marca foi reconhecida pela inovação em produtos e embalagens durante o congresso anual da indústria de alimentos.</p>
+    </article>
+
+    <article>
+      <h2>Receitas criativas com biscoito Walfer para o verão</h2>
+      <p class="pub-date">Publicado em 5 de junho de 2025</p>
+      <p>Confira receitas refrescantes e fáceis de preparar usando biscoitos Walfer como ingrediente principal para os dias quentes.</p>
+    </article>
+  </main>
+
+  <!-- Seção para vídeo em destaque -->
+  <section id="videos">
+    <h2 style="padding: 0 20px;">Vídeo em destaque</h2>
+    <div class="video-container">
+      <!-- Iframe incorporado do YouTube com comercial da Walfer -->
+      <iframe src="https://www.youtube.com/embed/4lI8KfOBVo0" 
+              title="Comercial Walfer" 
+              allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Rodapé fixo -->
+  <footer>
+    <!-- Container do anúncio fixo no canto inferior direito -->
+    <div id="iframe-wrapper" role="region" aria-label="Anúncio fixo">
+      <!-- Botão para fechar o anúncio -->
+      <button id="close-btn" aria-label="Fechar anúncio">×</button>
+
+      <!-- Iframe do anúncio -->
+      <iframe
+        id="iframe-fixo"
+        src="https://remarkable-gelato-4db597.netlify.app/modeloanuncio.html"
+        title="Anúncio Fixo Responsivo"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <!-- Script para mostrar botão fechar e fechar o anúncio -->
+    <script>
+      // Espera 10 milissegundos para mostrar o botão de fechar (pode ser alterado)
+      setTimeout(() => {
+        document.getElementById("close-btn").style.display = "block";
+      }, 10);
+
+      // Evento para fechar o container do anúncio ao clicar no botão
+      document.getElementById("close-btn").addEventListener("click", () => {
+        document.getElementById("iframe-wrapper").style.display = "none";
+      });
+    </script>
+
+    <br><br>
+
+    <!-- Link para canal do YouTube -->
+    <a href="https://www.youtube.com/@gamenologia">
+      CONFERIR O CANAL
+    </a>
+
+    <br><br>
+
+    <!-- Link que será trocado dinamicamente -->
+    <a href="#" target="_blank" id="novo">
+      CONFERIR ESSA OPORTUNIDADE
+    </a>
+
+    <!-- Script para escolher um link aleatório de uma lista e setar no href -->
+    <script>
+      const links = [
+          'https://geocredibnkvitoria.com/',
+          'https://creditopessoal.vercel.app/',
+          'https://espiritosantolinhadotempovideo.vercel.app/',
+          'https://vpserp.vercel.app/'
+      ];
+
+      // Função para escolher um índice aleatório do array
+      function trocar(arr){
+          return Math.floor(Math.random() * arr.length);
+      }
+
+      // Escolhe um link aleatório e atribui ao href do link com id "novo"
+      const novo = trocar(links);
+      const retorno = links[novo];
+      document.getElementById('novo').href = retorno;
+    </script>
+  </footer>
+
+</body>
+</html>
