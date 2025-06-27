@@ -269,7 +269,7 @@
     <h2 style="padding: 0 20px;">Vídeo em destaque</h2>
     <div class="video-container">
       <!-- Iframe incorporado do YouTube com comercial da Walfer -->
-      <iframe src="https://www.youtube.com/embed/4lI8KfOBVo0" 
+      <iframe src="https://www.youtube.com/embed/cwC8xl8zGGw" 
               title="Comercial Walfer" 
               allowfullscreen>
       </iframe>
